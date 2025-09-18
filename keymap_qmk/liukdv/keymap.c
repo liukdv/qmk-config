@@ -31,18 +31,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* EXTEND (Navigation, editing, function keys, symbols) */
 [_EXTEND] = LAYOUT(
   KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  KC_TILD,  _______, C(S(KC_Z)), KC_BSPC, KC_WBAK, _______,                KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
-  _______,  KC_LALT, _______, KC_LSFT, KC_LCTL, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______,
-  _______,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_LBRC, _______, C(KC_LEFT), C(KC_DOWN), C(KC_UP), C(KC_RGHT), _______,
-                             _______, DF(_COLEMAK), DF(_QWERTY), _______, _______,  DF(_COLEMAK), DF(_QWERTY), _______
+  KC_TAB,  _______, C(S(KC_Z)), KC_BSPC, KC_WBAK, _______,                KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
+  KC_LSFT,  KC_LALT, _______, KC_LSFT, KC_LCTL, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_TILD,
+  KC_LCTL,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_LBRC, _______, C(KC_LEFT), C(KC_DOWN), C(KC_UP), C(KC_RGHT), _______,
+                             KC_LALT, DF(_COLEMAK), DF(_QWERTY), KC_ENT, KC_SPC,  DF(_COLEMAK), DF(_QWERTY), _______
 ),
 
 [_EXTEND_QW] = LAYOUT(
   KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  KC_TILD,  _______, C(S(KC_Z)), KC_BSPC, KC_WBAK, _______,                KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
-  _______,  KC_LALT, _______, KC_LSFT, KC_LCTL, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______,
-  _______,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_LBRC, _______, C(KC_LEFT), C(KC_DOWN), C(KC_UP), C(KC_RGHT), _______,
-                             _______, DF(_COLEMAK), DF(_QWERTY), _______, _______,  DF(_COLEMAK), DF(_QWERTY), _______
+  KC_TAB,  _______, C(S(KC_Z)), KC_BSPC, KC_WBAK, _______,                KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
+  KC_LSFT,  KC_LALT, _______, KC_LSFT, KC_LCTL, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_TILD,
+  KC_LCTL,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_LBRC, _______, C(KC_LEFT), C(KC_DOWN), C(KC_UP), C(KC_RGHT), _______,
+                             KC_LALT, DF(_COLEMAK), DF(_QWERTY), KC_ENT, KC_SPC,  DF(_COLEMAK), DF(_QWERTY), _______
 ),
 
 
@@ -65,19 +65,10 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return is_keyboard_master() ? rotation : OLED_ROTATION_180;
 }
 
-// show stored default (what DF() wrote)
-static void oled_print_default_layer(void) {
-    uint32_t dl = default_layer_state;
-    oled_write_P(PSTR("Default: "), false);
-    if (dl & (1UL << _QWERTY))      oled_write_ln_P(PSTR("QWERTY"),  false);
-    else if (dl & (1UL << _COLEMAK)) oled_write_ln_P(PSTR("COLEMAK"), false);
-    else                             oled_write_ln_P(PSTR("?"),       false);
-}
-
-// show *current* effective layer (prefer overlays; fall back to default base)
+// show *current* layer: prefer overlays; fall back to default base
 static void oled_print_layer(void) {
-    uint8_t overlay = get_highest_layer(layer_state);            // momentary/toggled
-    uint8_t base    = get_highest_layer(default_layer_state);    // persistent default
+    uint8_t overlay = get_highest_layer(layer_state);          // momentary/toggled
+    uint8_t base    = get_highest_layer(default_layer_state);  // persistent default
 
     oled_write_P(PSTR("Layer: "), false);
 
@@ -96,6 +87,18 @@ static void oled_print_layer(void) {
     // No overlay: show the current base layout
     oled_write_ln_P(base == _QWERTY ? PSTR("QWERTY") : PSTR("COLEMAK"), false);
 }
+
+
+
+// show stored default (what DF() wrote)
+static void oled_print_default_layer(void) {
+    uint32_t dl = default_layer_state;
+    oled_write_P(PSTR("Default: "), false);
+    if (dl & (1UL << _QWERTY))      oled_write_ln_P(PSTR("QWERTY"),  false);
+    else if (dl & (1UL << _COLEMAK)) oled_write_ln_P(PSTR("COLEMAK"), false);
+    else                             oled_write_ln_P(PSTR("?"),       false);
+}
+
 
 
 static void oled_print_wpm(void) {
