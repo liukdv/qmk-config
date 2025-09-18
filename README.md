@@ -2,8 +2,8 @@
 lily58 qmk config
 
 
-cd ~/qmk_firmware
-(or where qmk home is_=)
+```cd ~/qmk_firmware```
+(or where qmk home is)
 
 qmk config user.keyboard=lily58/rev1
 qmk config user.keymap=liukdv\
