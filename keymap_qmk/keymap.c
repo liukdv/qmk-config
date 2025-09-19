@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
   KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
   KC_LCTL,  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                     KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, DF(_QWERTY),KC_RBRC,KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, DF(_QWERTY),KC_LBRC,KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                         MO(_EXTEND), KC_DEL, KC_BSPC, KC_SPC,  KC_ENT, KC_RALT, KC_LGUI, KC_LALT
 ),
 
@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_EQL,
   KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                        KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_MINS,
   KC_LCTL,  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                        KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, DF(_COLEMAK), KC_RBRC, KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_RSFT,
+  KC_LSFT,  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, DF(_COLEMAK), KC_LBRC, KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_RSFT,
                        MO(_EXTEND_QW) , KC_DEL, KC_BSPC, KC_SPC,  KC_ENT, KC_RALT, KC_LGUI, KC_LALT
 
 ),
@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F12, KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F6, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   KC_TAB,  KC_ESC, C(S(KC_Z)), KC_WBAK, KC_WFWD, _______ ,                 KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
   KC_LCTL,  KC_LALT, _______, KC_LSFT, KC_LCTL, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_GRV,
-  KC_LSFT,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_LBRC, KC_MPRV, KC_VOLD, KC_MPLY, KC_VOLU, KC_MNXT, KC_BSLS,
+  KC_LSFT,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_RBRC, KC_MPRV, KC_VOLD, KC_MPLY, KC_VOLU, KC_MNXT, KC_BSLS,
                         _______, KC_DEL, KC_BSPC,        KC_SPC,   KC_ENT, KC_RALT , KC_LGUI, KC_LALT
 ),
 
@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F12, KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   KC_TAB,  KC_ESC, C(S(KC_Z)), KC_WBAK, KC_WFWD, _______,                  KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
   KC_LCTL,  KC_LALT, _______, KC_LSFT, KC_LCTL, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_GRV,
-  KC_LSFT,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_LBRC, KC_MPRV, KC_VOLD, KC_MPLY, KC_VOLU, KC_MNXT, KC_BSLS,
+  KC_LSFT,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), _______, _______, KC_RBRC, KC_MPRV, KC_VOLD, KC_MPLY, KC_VOLU, KC_MNXT, KC_BSLS,
                        _______, KC_DEL, KC_BSPC, KC_SPC, KC_ENT,  KC_RALT, KC_LGUI, KC_LALT
 ),
 };
@@ -74,10 +74,10 @@ static void oled_print_layer(void) {
     // If an overlay is active, show it first
     switch (overlay) {
         case _EXTEND:
-            oled_write_ln_P(PSTR("EXTEND (cmk)"), false);
+            oled_write_ln_P(PSTR("(cmk) EXTEND"), false);
             return;
         case _EXTEND_QW:
-            oled_write_ln_P(PSTR("EXTEND (qw)"), false);
+            oled_write_ln_P(PSTR("(qw) EXTEND"), false);
             return;
         default:
             break; // no overlay → show base below
@@ -90,46 +90,51 @@ static void oled_print_layer(void) {
 
 
 // show stored default (what DF() wrote)
-static void oled_print_default_layer(void) {
-    uint32_t dl = default_layer_state;
-    oled_write_P(PSTR("Default: "), false);
-    if (dl & (1UL << _QWERTY))      oled_write_ln_P(PSTR("QWERTY"),  false);
-    else if (dl & (1UL << _COLEMAK)) oled_write_ln_P(PSTR("COLEMAK"), false);
-    else                             oled_write_ln_P(PSTR("?"),       false);
-}
+// static void oled_print_default_layer(void) {
+//     uint32_t dl = default_layer_state;
+//     oled_write_P(PSTR("Default: "), false);
+//     if (dl & (1UL << _QWERTY))      oled_write_ln_P(PSTR("QWERTY"),  false);
+//     else if (dl & (1UL << _COLEMAK)) oled_write_ln_P(PSTR("COLEMAK"), false);
+//     else                             oled_write_ln_P(PSTR("?"),       false);
+// }
 
 
+// static inline void oled_print_wpm_and_count(void) {
+//   char buf[22];                              // ~21 chars per line on 128×32
+//   uint8_t w = get_current_wpm();
+//   unsigned long c = press_count;
+//   snprintf(buf, sizeof(buf), "wpm:%3u  count:%lu", w, c);
+//   oled_write_ln(buf, false);
+// }
 
-static void oled_print_wpm(void) {
-    uint8_t w = get_current_wpm();
-    char buf[8];
-    oled_write_P(PSTR("WPM: "), false);
-    snprintf(buf, sizeof(buf), "%3u", w);
-    oled_write_ln(buf, false);
-}
-
-static void oled_print_keystrokes(void) {
-    char buf[16];
-    oled_write_P(PSTR("Keys: "), false);
-    snprintf(buf, sizeof(buf), "%lu", (unsigned long)press_count);
-    oled_write_ln(buf, false);
-}
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        // LEFT
-        oled_write_ln(read_keylog(),  false);
-        oled_write_ln(read_keylogs(), false);
-        oled_print_default_layer();
-        oled_print_layer();
-        oled_print_wpm();
-        oled_print_keystrokes();
-    } else {
-        // RIGHT: Lily58 logo only
-        oled_write(read_logo(), false);
-    }
-    return false;
+  if (is_keyboard_master()) {
+    // 1) Normal history (no label to maximize space)
+    oled_write_ln(read_keylogs(), false);
+
+    // 2) WPM on its own line
+    oled_write_P(PSTR("wpm: "), false);
+    char wbuf[8];
+    snprintf(wbuf, sizeof(wbuf), "%3u", get_current_wpm());
+    oled_write_ln(wbuf, false);
+
+    // 3) count on its own line
+    oled_write_P(PSTR("count: "), false);
+    char cbuf[16];
+    snprintf(cbuf, sizeof(cbuf), "%lu", (unsigned long)press_count);
+    oled_write_ln(cbuf, false);
+
+    // 4) Layer
+    oled_print_layer();
+    // oled_print_default_layer();
+
+  } else {
+    oled_write(read_logo(), false); // Offhand: logo only
+  }
+  return false;
 }
+
 #endif // OLED_ENABLE
 
 // keep hook available
@@ -143,7 +148,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_keylog(keycode, record);
     }
 #else
-    if (record->event.pressed) press_count++;
+        if (record->event.pressed) {press_count++;}
 #endif
     return true;
 }
