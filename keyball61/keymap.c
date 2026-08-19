@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F12,  KC_F1,     KC_F2,        KC_F3,   KC_F4,       KC_F5,                                       KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
         _______, KC_ESC,    C(S(KC_Z)),   KC_WBAK, KC_WFWD,     S(KC_TAB),                                   KC_PGUP,  KC_HOME, KC_UP,   KC_END,  KC_BSPC,   KC_PSCR,
         _______, KC_LALT,   KC_LCTL,      KC_LSFT, KC_RGUI,     KC_TAB,                                      KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,    _______,
-        _______, C(KC_Z),   KC_BSPC,      KC_ESC,  KC_DEL,      KC_ENT,         _______,            KC_RBRC, KC_GRV ,  KC_VOLD, KC_MPLY, KC_VOLU, KC_QUOT,   _______,
+        _______, C(KC_Z),   KC_BSPC,      KC_ESC,  KC_DEL,      KC_ENT,         _______,            KC_RBRC, KC_GRV ,  KC_VOLD, KC_MPLY, KC_VOLU, KC_BSLS,   _______,
         _______, _______,   _______,      _______, _______,     _______,        _______,            _______, _______,                             KC_MUTE,   KC_TILDE
     ),
 
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F12,  KC_F1,     KC_F2,        KC_F3,   KC_F4,       KC_F5,                                       KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
         _______, KC_ESC,    C(S(KC_Z)),   KC_WBAK, KC_WFWD,     S(KC_TAB),                                   KC_PGUP,  KC_HOME, KC_UP,   KC_END,  KC_BSPC,   KC_PSCR,
         _______, KC_LALT,   KC_LCTL,      KC_LSFT, KC_RGUI,     KC_TAB,                                      KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,    _______,
-        _______, C(KC_Z),   KC_BSPC,      KC_ESC,  KC_DEL,      KC_ENT,         _______,            KC_RBRC, KC_GRV ,  KC_VOLD, KC_MPLY, KC_VOLU, KC_QUOT,   _______,
+        _______, C(KC_Z),   KC_BSPC,      KC_ESC,  KC_DEL,      KC_ENT,         _______,            KC_RBRC, KC_GRV ,  KC_VOLD, KC_MPLY, KC_VOLU, KC_BSLS,   _______,
         _______, _______,   DF(_GAMING),  _______, _______,     _______,        _______,            _______, _______,                             KC_MUTE,   KC_TILDE
     ),
 
@@ -62,23 +62,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F12,  KC_F1,     KC_F2,        KC_F3,   KC_F4,       KC_F5,                                       KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
         _______, KC_ESC,    C(S(KC_Z)),   KC_WBAK, KC_WFWD,     S(KC_TAB),                                   KC_PGUP,  KC_HOME, KC_UP,   KC_END,  KC_BSPC,   KC_PSCR,
         _______, KC_LALT,   KC_LCTL,      KC_LSFT, KC_RGUI,     KC_TAB,                                      KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,    _______,
-        _______, C(KC_Z),   KC_BSPC,      KC_ESC,  KC_DEL,      KC_ENT,         _______,            KC_RBRC, KC_GRV ,  KC_VOLD, KC_MPLY, KC_VOLU, KC_QUOT,   _______,
+        _______, C(KC_Z),   KC_BSPC,      KC_ESC,  KC_DEL,      KC_ENT,         _______,            KC_RBRC, KC_GRV ,  KC_VOLD, KC_MPLY, KC_VOLU, KC_BSLS,   _______,
         _______, _______,   DF(_QWERTY),  _______, _______,     _______,        _______,            _______, _______,                             KC_MUTE,   KC_TILDE
     ),
 
     [_MOUSE] = LAYOUT_right_ball(
         _______, _______,   _______,      _______, _______,     _______,                                     _______,  _______, _______, _______, _______,   _______,
         _______, _______,   _______,      KC_WBAK, KC_WFWD,     _______,                                     _______,  KC_WFWD, KC_WBAK, _______, _______,   _______,
-        _______, MOUSE_OFF, KC_ESC ,      MS_BTN2, MS_BTN1,     _______,                                     _______,  MS_BTN1, MS_BTN2, KC_ESC,  MOUSE_OFF, _______,
-        _______, _______,   _______,      MS_BTN3, SCRL_MO,     _______,        _______,            _______, _______,  SCRL_MO, MS_BTN3, _______, _______,   _______,
+        _______, MOUSE_OFF, MS_BTN3,      MS_BTN2, MS_BTN1,     _______,                                     _______,  MS_BTN1, MS_BTN2, MS_BTN3, MOUSE_OFF, _______,
+        _______, _______,   _______,      KC_ESC,  SCRL_MO,     _______,        _______,            _______, _______,  SCRL_MO, KC_ESC,  _______, _______,   _______,
         _______, _______,   _______,      _______, _______,     _______,        _______,            _______, _______,                             _______,   _______
     ),
 
     [_NUMPAD] = LAYOUT_right_ball(
         _______, _______,   _______,      _______, _______,     _______,                                     _______,  _______, _______, _______, _______,   _______,
         _______, C(KC_Q),   C(KC_W),      _______,A(KC_F4),     UG_NEXT,                                     KC_0,     KC_1,    KC_2,    KC_3,    KC_ASTR,   KC_ESC ,
-        _______, C(KC_A),   _______,      _______, _______,     UG_PREV,                                     KC_DOT,   KC_4,    KC_5,    KC_6,    KC_MINS,   _______,
-        _______, C(KC_Z),   C(KC_X),      C(KC_C), C(KC_V),     UG_TOGG,        _______,            KC_EQL,  KC_PLUS,  KC_7,    KC_8,    KC_9,    KC_SLSH,   _______,
+        _______, C(KC_A),   _______,      _______, _______,     UG_PREV,                                     KC_DOT,   KC_4,    KC_5,    KC_6,    KC_QUOT,   _______,
+        _______, C(KC_Z),   C(KC_X),      C(KC_C), C(KC_V),     UG_TOGG,        _______,            KC_EQL,  KC_MINS,  KC_7,    KC_8,    KC_9,    KC_SLSH,   _______,
         _______, _______,   _______,      _______, _______,     _______,        _______,            _______, _______,                             _______,   _______
     ),
 
