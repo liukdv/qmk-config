@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT_right_ball(
         _______, _______,   _______,      _______, _______,     _______,                                     _______,  _______, _______, _______, _______,   _______,
-        _______, C(KC_Q),   C(KC_W),      _______, _______,     UG_NEXT,                                     KC_0,     KC_1,    KC_2,    KC_3,    KC_ASTR,   KC_ESC ,
+        _______, C(KC_Q),   C(KC_W),      _______,A(KC_F4),     UG_NEXT,                                     KC_0,     KC_1,    KC_2,    KC_3,    KC_ASTR,   KC_ESC ,
         _______, C(KC_A),   _______,      _______, _______,     UG_PREV,                                     KC_DOT,   KC_4,    KC_5,    KC_6,    KC_MINS,   _______,
         _______, C(KC_Z),   C(KC_X),      C(KC_C), C(KC_V),     UG_TOGG,        _______,            KC_EQL,  KC_PLUS,  KC_7,    KC_8,    KC_9,    KC_SLSH,   _______,
         _______, _______,   _______,      _______, _______,     _______,        _______,            _______, _______,                             _______,   _______
