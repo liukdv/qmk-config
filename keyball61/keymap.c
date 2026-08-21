@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,      KC_W,         KC_F,    KC_P,        KC_G,                                 KC_J,     KC_L,    KC_U,    KC_Y,    KC_SCLN,   KC_MINS,
         KC_LSFT, KC_A,      KC_R,         KC_S,    KC_T,        KC_D,                                 KC_H,     KC_N,    KC_E,    KC_I,    KC_O,      KC_RSFT,
         KC_LCTL, KC_Z,      KC_X,         KC_C,    KC_V,        KC_B,    KC_RALT,            KC_LBRC, KC_K,     KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RCTL,
-        MO(_FN), KC_APP, DF(_QWERTY),  KC_LGUI, KC_LALT, MO(_EXTEND),    KC_SPC,             KC_BSPC, MO(_NUMPAD),                         KC_BSLS,   KC_QUOT
+        KC_APP, DF(_QWERTY), MO(_NUMPAD), KC_LGUI, KC_LALT, MO(_EXTEND),    KC_SPC,             LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT),                 KC_BSLS,   KC_QUOT
     ),
 
     [_QWERTY] = LAYOUT_right_ball(
@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,      KC_W,         KC_E,    KC_R,        KC_T,                                 KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,      KC_MINS,
         KC_LSFT, KC_A,      KC_S,         KC_D,    KC_F,        KC_G,                                 KC_H,     KC_J,    KC_K,    KC_L,    KC_SCLN,   KC_RSFT,
         KC_LCTL, KC_Z,      KC_X,         KC_C,    KC_V,        KC_B,    KC_RALT,            KC_LBRC, KC_N,     KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RCTL,
-        MO(_FN), KC_APP, DF(_COLEMAK), KC_LGUI, KC_LALT, MO(_EXTEND),    KC_SPC,             KC_BSPC, MO(_NUMPAD),                         KC_BSLS,   KC_QUOT
+        KC_APP, DF(_COLEMAK), MO(_NUMPAD),KC_LGUI, KC_LALT, MO(_EXTEND),    KC_SPC,             LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT),                 KC_BSLS,   KC_QUOT
     ),
 
     [_EXTEND] = LAYOUT_right_ball(
@@ -42,18 +42,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT_right_ball(
         _______, _______,   _______,      _______, _______,     _______,                                _______,  _______, _______, _______, _______,   _______,
-        _______,A(KC_F4),   C(KC_W),      KC_LEFT, KC_RGHT,    KC_TILDE,                                KC_ASTR,  KC_7,    KC_8,    KC_9,    KC_ESC ,   _______,
-        _______, C(KC_A),   KC_BSPC,      KC_MINS, KC_PLUS,     KC_GRV ,                                KC_0,     KC_4,    KC_5,    KC_6,    KC_EQL ,   _______,
-        _______, C(KC_Z),   C(KC_X),      C(KC_C), C(KC_V),     KC_COMM,   _______,            _______, KC_DOT,   KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
+        _______,A(KC_F4),   C(KC_W),      KC_LEFT, KC_RGHT,     KC_TILDE,                               KC_ASTR,  KC_7,    KC_8,    KC_9,    KC_QUOT,   _______,
+        _______, C(KC_A),   KC_BSPC,      KC_MINS, KC_PLUS,     KC_DQUO ,                               KC_0,     KC_4,    KC_5,    KC_6,    KC_EQL ,   _______,
+        _______, C(KC_Z),   C(KC_X),      C(KC_C), C(KC_V),     KC_COMM,   KC_GRV ,            KC_ESC , KC_DOT,   KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
         _______, _______,   _______,      _______, _______,     _______,   _______,            _______, _______,                             _______,   _______
     ),
 
     [_FN] = LAYOUT_right_ball(
-        KC_F12,  KC_F1,     KC_F2,        KC_F3,   KC_F4,       KC_F5,                                  KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
-        _______, CPI_D1K,   CPI_D100,    CPI_I100, CPI_I1K,     DF(_GAMING),                            KC_F11,   KC_F7,   KC_F8,   KC_F9,   KC_F12,    _______,
-        _______, UG_TOGG,   UG_PREV,      UG_NEXT, _______,     _______,                                KC_F10,   KC_F4,   KC_F5,   KC_F6,   _______,   _______,
-        _______, _______,   _______,      _______, _______,     _______,   _______,            _______, _______,  KC_F1,   KC_F2,   KC_F3,   _______,   _______,
-        _______, _______,   _______,      _______, _______,     _______,   _______,            _______, _______,                             _______,   _______
+        KC_F12,  KC_F1,     KC_F2,        KC_F3,   KC_F4,   KC_F5,                               KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
+        _______, DF(_GAMING),_______,  _______, _______, _______,                                KC_F11,   KC_F7,   KC_F8,   KC_F9,   KC_F12,    _______,
+        _______, UG_TOGG,   UG_PREV,   UG_NEXT, _______, _______,                                KC_F10,   KC_F4,   KC_F5,   KC_F6,   _______,   _______,
+        _______, CPI_D1K,   CPI_D100,  CPI_I100, CPI_I1K,_______,   _______,            _______, _______,  KC_F1,   KC_F2,   KC_F3,   _______,   _______,
+        _______, _______,   _______,   _______, _______, _______,   _______,            _______, _______,                             _______,   _______
     ),
 
     [_MOUSE] = LAYOUT_right_ball(
@@ -185,6 +185,11 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
 bool is_mouse_record_user(uint16_t keycode, keyrecord_t *record) {
     (void)record;
     return keycode == KC_ESC && layer_state_is(_MOUSE);
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    (void)record;
+    return keycode == LT(_NUMPAD, KC_ENT);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
