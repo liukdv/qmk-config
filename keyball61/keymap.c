@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______, _______,   _______,
-        _______,     KC_ESC,       KC_MINS,             KC_PLUS,  KC_DQUO, S(KC_TAB),                                    KC_ASTR,             KC_7,    KC_8,    KC_9,    KC_QUOT,   RALT(KC_E),
+        _______,     KC_ESC,       KC_MINS,             KC_PLUS,  KC_DQUO, S(KC_TAB),                                    KC_ASTR,             KC_7,    KC_8,    KC_9,    KC_QUOT,   RALT(KC_5),
         _______,     KC_LALT,      KC_LCTL,             KC_LSFT,  KC_RGUI, KC_TAB,                                       KC_0,                KC_4,    KC_5,    KC_6,    KC_EQL,    _______,
         _______,     KC_TILDE,     KC_BSPC,             KC_ESC ,  KC_DEL , KC_ENT,     KC_GRV,        _______,           KC_DOT,              KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                        _______,   _______
@@ -89,6 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 static uint32_t press_count;
 static char     keylogs[21];
 static uint8_t  keylogs_index;
+static bool     mouse_oled_active;
 
 static const char code_to_name[60] = {
     ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
@@ -98,6 +99,38 @@ static const char code_to_name[60] = {
     'R', 'E', 'B', 'T', ' ', ' ', ' ', ' ', ' ', ' ',
     ' ', ';', '\'', ' ', ',', '.', '/', ' ', ' ', ' '
 };
+
+// Renders a 5x7 font at 4x scale, filling a 128x32 OLED with "MOUSE".
+static void oled_render_mouse_warning(void) {
+    static const uint8_t glyphs[5][7] PROGMEM = {
+        {0x11, 0x1B, 0x15, 0x11, 0x11, 0x11, 0x11},
+        {0x0E, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0E},
+        {0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0E},
+        {0x0F, 0x10, 0x10, 0x0E, 0x01, 0x01, 0x1E},
+        {0x1F, 0x10, 0x10, 0x1E, 0x10, 0x10, 0x1F},
+    };
+
+    oled_on();
+    oled_clear();
+
+    for (uint8_t letter = 0; letter < 5; letter++) {
+        for (uint8_t row = 0; row < 7; row++) {
+            uint8_t pixels = pgm_read_byte(&glyphs[letter][row]);
+
+            for (uint8_t column = 0; column < 5; column++) {
+                if (!(pixels & (1 << (4 - column)))) {
+                    continue;
+                }
+
+                for (uint8_t y = 0; y < 4; y++) {
+                    for (uint8_t x = 0; x < 4; x++) {
+                        oled_write_pixel(6 + (letter * 6 + column) * 4 + x, 2 + row * 4 + y, true);
+                    }
+                }
+            }
+        }
+    }
+}
 
 static void add_keylog(uint16_t keycode) {
     char name = keycode < 60 ? code_to_name[keycode] : ' ';
@@ -151,6 +184,19 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 bool oled_task_user(void) {
+    if (layer_state_is(_MOUSE)) {
+        if (!mouse_oled_active) {
+            oled_render_mouse_warning();
+            mouse_oled_active = true;
+        }
+        return false;
+    }
+
+    if (mouse_oled_active) {
+        oled_clear();
+        mouse_oled_active = false;
+    }
+
     if (is_keyboard_master()) {
         char buffer[16];
 
