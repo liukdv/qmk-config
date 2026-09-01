@@ -225,8 +225,8 @@ void keyboard_post_init_user(void) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    if (layer_state_cmp(state, _EXTEND)) {
-        // Keep trackball movement from reactivating _MOUSE while Extend is held.
+    if (layer_state_cmp(state, _EXTEND) || layer_state_cmp(state, _NUMPAD) || layer_state_cmp(state, _FN)) {
+        // Keep trackball movement from reactivating _MOUSE while a typing layer is held.
         state = remove_auto_mouse_layer(state, false);
         set_auto_mouse_enable(false);
     } else {
