@@ -13,6 +13,7 @@ enum layer_number {
 
 enum custom_keycodes {
     MOUSE_OFF = SAFE_RANGE,
+    HSCRL_MO,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -59,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MOUSE] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______, _______,   _______,
         _______,     _______,      _______,             MS_BTN4,  MS_BTN5, _______,                                      _______,             MS_BTN5, MS_BTN4, _______, _______,   _______,
-        _______,     MOUSE_OFF,    MS_BTN3,             MS_BTN2,  MS_BTN1, _______,                                      _______,             MS_BTN1, MS_BTN2, MS_BTN3, MOUSE_OFF, _______,
+        _______,     MOUSE_OFF,    MS_BTN3,             MS_BTN2,  MS_BTN1, HSCRL_MO,                                     HSCRL_MO,            MS_BTN1, MS_BTN2, MS_BTN3, MOUSE_OFF, _______,
         _______,     _______,      _______,             KC_ESC,   SCRL_MO, SCRL_TO,     _______,       _______,          SCRL_TO,             SCRL_MO, KC_ESC,  _______, _______,   _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                        _______,   _______
     ),
@@ -223,6 +224,17 @@ void keyboard_post_init_user(void) {
     set_auto_mouse_timeout(AUTO_MOUSE_TIME);
 }
 
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (layer_state_cmp(state, _EXTEND)) {
+        // Keep trackball movement from reactivating _MOUSE while Extend is held.
+        state = remove_auto_mouse_layer(state, false);
+        set_auto_mouse_enable(false);
+    } else {
+        set_auto_mouse_enable(get_highest_layer(default_layer_state) != _GAMING);
+    }
+    return state;
+}
+
 layer_state_t default_layer_state_set_user(layer_state_t state) {
     set_auto_mouse_enable(get_highest_layer(state) != _GAMING);
     return state;
@@ -230,7 +242,7 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
 
 bool is_mouse_record_user(uint16_t keycode, keyrecord_t *record) {
     (void)record;
-    return keycode == KC_ESC && layer_state_is(_MOUSE);
+    return keycode == HSCRL_MO || (keycode == KC_ESC && layer_state_is(_MOUSE));
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
@@ -245,6 +257,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_keylog(keycode);
     }
 #endif
+    if (keycode == HSCRL_MO) {
+        keyball_set_scroll_mode(record->event.pressed);
+
+        if (record->event.pressed) {
+            add_weak_mods(MOD_BIT(KC_LSFT));
+        } else {
+            del_weak_mods(MOD_BIT(KC_LSFT));
+        }
+
+        send_keyboard_report();
+        return false;
+    }
     if (keycode == MOUSE_OFF) {
         auto_mouse_reset_trigger(record->event.pressed);
         return false;
