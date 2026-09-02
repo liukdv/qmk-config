@@ -1,68 +1,71 @@
 #include QMK_KEYBOARD_H
 
-// Layer definitions
 enum layer_number {
-  _COLEMAK = 0,   // Base Colemak layer
+  _COLEMAK = 0,
   _QWERTY,
-  _GAMING,        // Base Gaming
-  _EXTEND,        // Dreymar-style Extend layer
-  _EXTEND_QW,
-  _EXTEND_GM,
+  _EXTEND,
+  _NUMPAD,
+  _FN,
+  _GAMING,
+  _GAME_NUM,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* COLEMAK */
-[_COLEMAK] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                           KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
-  KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                           KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
-  KC_LSFT,  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                           KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-  KC_LCTL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,   DF(_QWERTY), KC_LBRC,   KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                        KC_LGUI, KC_DEL,  MO(_EXTEND), KC_SPC,      KC_BSPC,   KC_ENT, KC_RALT, KC_LALT
-),
+    [_COLEMAK] = LAYOUT(
+        KC_ESC,  KC_1, KC_2, KC_3, KC_4, KC_5,                                      KC_6,    KC_7, KC_8,    KC_9,   KC_0,    KC_EQL,
+        KC_TAB,  KC_Q, KC_W, KC_F, KC_P, KC_G,                                      KC_J,    KC_L, KC_U,    KC_Y,   KC_SCLN, KC_MINS,
+        KC_LSFT, KC_A, KC_R, KC_S, KC_T, KC_D,                                      KC_H,    KC_N, KC_E,    KC_I,   KC_O,    KC_RSFT,
+        KC_LCTL, KC_Z, KC_X, KC_C, KC_V, KC_B, DF(_QWERTY),              KC_LBRC,   KC_K,    KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL,
+                              KC_LGUI, KC_LALT, MO(_EXTEND), KC_SPC,     LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT), KC_RALT, KC_APP
+    ),
 
-/* QWERTY */
-[_QWERTY] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                                 KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_EQL,
-  KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                 KC_Y,   KC_U,  KC_I,    KC_O,   KC_P,   KC_MINS,
-  KC_LSFT,  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                 KC_H,   KC_J,  KC_K,    KC_L,   KC_SCLN,KC_QUOT,
-  KC_LCTL,  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,        DF(_COLEMAK), KC_LBRC,   KC_N,   KC_M,  KC_COMM, KC_DOT, KC_SLSH,KC_RSFT,
-                       KC_LGUI, KC_DEL, MO(_EXTEND_QW),  KC_SPC,       KC_BSPC,   KC_ENT, KC_RALT, KC_LALT
+    [_QWERTY] = LAYOUT(
+        KC_ESC,  KC_1, KC_2, KC_3, KC_4, KC_5,                                      KC_6,    KC_7, KC_8,    KC_9,   KC_0,    KC_EQL,
+        KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                                      KC_Y,    KC_U, KC_I,    KC_O,   KC_P,    KC_MINS,
+        KC_LSFT, KC_A, KC_S, KC_D, KC_F, KC_G,                                      KC_H,    KC_J, KC_K,    KC_L,   KC_SCLN, KC_RSFT,
+        KC_LCTL, KC_Z, KC_X, KC_C, KC_V, KC_B, DF(_COLEMAK),             KC_LBRC,   KC_N,    KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL,
+                              KC_LGUI, KC_LALT, MO(_EXTEND), KC_SPC,     LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT), KC_RALT, KC_APP
+    ),
 
-),
+    [_EXTEND] = LAYOUT(
+        KC_F12,  KC_F1,   KC_F2,      KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        _______, KC_ESC,  C(S(KC_Z)), KC_WBAK, KC_WFWD, S(KC_TAB),                 KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_GRV,
+        _______, KC_LALT, KC_LCTL,    KC_LSFT, KC_RGUI, KC_TAB,                    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______,
+        _______, C(KC_Z), KC_BSPC,    KC_ESC,  KC_DEL,  KC_ENT, _______,  KC_RBRC, KC_BSLS, KC_VOLD, KC_MPLY, KC_VOLU, KC_QUOT, _______,
+                                  _______, _______, _______, _______,     KC_SPC , KC_ENT, _______, _______
+    ),
 
-/* QWERTY GAMING*/
-[_GAMING] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                                KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_EQL,
-  KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_MINS,
-  KC_LSFT,  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,KC_QUOT,
-  KC_LCTL,  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,        DF(_QWERTY), KC_LBRC,   KC_N,   KC_M,   KC_COMM, KC_DOT, KC_SLSH,KC_RSFT,
-                        KC_LGUI, KC_LALT, KC_SPC,  MO(_EXTEND_GM),      KC_BSPC, KC_ENT, KC_RALT, KC_DEL
-),
+    [_NUMPAD] = LAYOUT(
+        _______, _______,  _______, _______, _______, _______,                     _______, _______, _______, _______, _______,   _______,
+        _______, KC_ESC,   KC_MINS, KC_PLUS, KC_DQUO, S(KC_TAB),                   KC_ASTR, KC_7,    KC_8,    KC_9,    KC_QUOT,   RALT(KC_5),
+        _______, KC_LALT,  KC_LCTL, KC_LSFT, KC_RGUI, KC_TAB,                      KC_0,    KC_4,    KC_5,    KC_6,    KC_EQL,    _______,
+        _______, KC_TILDE, KC_BSPC, KC_ESC,  KC_DEL,  KC_ENT, KC_GRV,     _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
+                                  _______, _______, _______, _______,     _______, _______, _______, _______
+    ),
 
-/* EXTEND (Navigation, editing, function keys, symbols) */
-[_EXTEND] = LAYOUT(
-  KC_F12, KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,                          KC_F6, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-  KC_TAB,  KC_ESC, C(S(KC_Z)), KC_WBAK, KC_WFWD, S(KC_TAB),                    KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
-  KC_LSFT,  KC_LALT, KC_LCTL, KC_LSFT, KC_RGUI, KC_TAB,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_GRV,
-  KC_LCTL,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_ENT,   _______,   KC_RBRC,  KC_TILDE, KC_VOLD, KC_MPLY, KC_VOLU, KC_BSLS, KC_RSFT,
-                        KC_LGUI, KC_DEL, _______,         KC_SPC,    KC_BSPC,  KC_ENT, KC_RALT, KC_LALT
-),
+    [_FN] = LAYOUT(
+        KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,  KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
+        _______, KC_ESC,  _______, _______, _______, DF(_GAMING),                  KC_F11, KC_F7, KC_F8, KC_F9, KC_F12, _______,
+        _______, KC_LALT, KC_LCTL, KC_LSFT, KC_RGUI, _______,                      KC_F10, KC_F4, KC_F5, KC_F6, _______, _______,
+        _______, _______, _______, _______, _______, KC_PSCR, _______,   A(KC_F4), _______,KC_F1, KC_F2, KC_F3, _______, _______,
+                                  _______, _______, _______, _______,     _______, _______, _______, _______
+    ),
 
-[_EXTEND_QW] = LAYOUT(
-  KC_F12, KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-  KC_TAB,  KC_ESC, C(S(KC_Z)), KC_WBAK, KC_WFWD, S(KC_TAB),                        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
-  KC_LSFT,  KC_LALT, KC_LCTL, KC_LSFT, KC_RGUI, KC_TAB,                            KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_GRV,
-  KC_LCTL,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_ENT,   DF(_GAMING), KC_RBRC, KC_TILDE, KC_VOLD, KC_MPLY, KC_VOLU, KC_BSLS, KC_RSFT,
-                       KC_LGUI, KC_DEL, _______,            KC_SPC,  KC_BSPC,   KC_ENT, KC_RALT, KC_LALT
-),
+    [_GAMING] = LAYOUT(
+        KC_ESC,  KC_1, KC_2, KC_3, KC_4, KC_5,                                      KC_6,    KC_7, KC_8,    KC_9,   KC_0,    KC_EQL,
+        KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                                      KC_Y,    KC_U, KC_I,    KC_O,   KC_P,    KC_MINS,
+        KC_LSFT, KC_A, KC_S, KC_D, KC_F, KC_G,                                      KC_H,    KC_J, KC_K,    KC_L,   KC_SCLN, KC_RSFT,
+        KC_LCTL, KC_Z, KC_X, KC_C, KC_V, KC_B, DF(_QWERTY),             KC_LBRC,    KC_N,    KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL,
+                              KC_LGUI, KC_LALT, MO(_GAME_NUM), KC_SPC,   LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT), KC_RALT, KC_APP
+    ),
 
-[_EXTEND_GM] = LAYOUT(
-  KC_F12, KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,                               KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-  KC_TAB,  KC_ESC, C(S(KC_Z)), KC_WBAK, KC_WFWD, S(KC_TAB),                         KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
-  KC_LSFT,  KC_LALT, KC_LCTL, KC_LSFT, KC_RGUI, KC_TAB,                             KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, KC_GRV,
-  KC_LCTL,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_ENT,      DF(_QWERTY), KC_RBRC,  KC_TILDE, KC_VOLD, KC_MPLY, KC_VOLU, KC_BSLS, KC_RSFT,
-                        KC_LGUI, KC_LALT, KC_SPC,            _______,     KC_BSPC,  KC_ENT, KC_RALT, KC_DEL
-),
+    [_GAME_NUM] = LAYOUT(
+        _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, KC_1,    KC_2,                         KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_PSCR,
+        _______, _______, _______, _______, KC_3,    KC_4,                         KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______,
+        _______, KC_7,    KC_8,    KC_9,    KC_5,    KC_6, KC_0,          KC_RBRC, KC_BSLS, KC_VOLD, KC_MPLY, KC_VOLU, KC_QUOT, _______,
+                                  _______, _______, _______, _______,     _______, _______, _______, _______
+    ),
 };
 
 // ─── OLED: Left = keylogs + Default + Layer + WPM + keys | Right = Lily58 logo ──
@@ -92,13 +95,16 @@ static void oled_print_layer(void) {
     // If an overlay is active, show it first
     switch (overlay) {
         case _EXTEND:
-            oled_write_ln_P(PSTR("(cmk) EXTEND"), false);
+            oled_write_ln_P(PSTR("EXTEND"), false);
             return;
-        case _EXTEND_QW:
-            oled_write_ln_P(PSTR("(qw) EXTEND"), false);
+        case _NUMPAD:
+            oled_write_ln_P(PSTR("NUMPAD"), false);
             return;
-        case _EXTEND_GM:
-            oled_write_ln_P(PSTR("(gm) EXTEND"), false);
+        case _FN:
+            oled_write_ln_P(PSTR("FN"), false);
+            return;
+        case _GAME_NUM:
+            oled_write_ln_P(PSTR("GAME NUM"), false);
             return;
         default:
             break; // no overlay → show base below
