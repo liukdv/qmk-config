@@ -14,6 +14,8 @@ enum layer_number {
 enum custom_keycodes {
     MOUSE_OFF = SAFE_RANGE,
     HSCRL_MO,
+    CPI_HIGH_MO,
+    CPI_LOW_MO,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -43,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______, _______,   _______,
-        _______,     KC_ESC,       KC_MINS,             KC_PLUS,  KC_DQUO, S(KC_TAB),                                    KC_ASTR,             KC_7,    KC_8,    KC_9,    KC_QUOT,   RALT(KC_5),
+        _______,     KC_ESC,       KC_DQUO,             KC_MINS,  KC_PLUS, S(KC_TAB),                                    KC_ASTR,             KC_7,    KC_8,    KC_9,    KC_QUOT,   RALT(KC_5),
         _______,     KC_LALT,      KC_LCTL,             KC_LSFT,  KC_RGUI, KC_TAB,                                       KC_0,                KC_4,    KC_5,    KC_6,    KC_EQL,    _______,
         _______,     KC_TILDE,     KC_BSPC,             KC_ESC ,  KC_DEL , KC_ENT,     KC_GRV,        _______,           KC_DOT,              KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                        _______,   _______
@@ -59,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_MOUSE] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______, _______,   _______,
-        _______,     _______,      _______,             MS_BTN4,  MS_BTN5, _______,                                      _______,             MS_BTN5, MS_BTN4, _______, _______,   _______,
+        _______,     _______,      CPI_HIGH_MO,         MS_BTN4,  MS_BTN5, _______,                                      _______,             MS_BTN5, MS_BTN4, CPI_HIGH_MO, _______, _______,
         _______,     MOUSE_OFF,    MS_BTN3,             MS_BTN2,  MS_BTN1, HSCRL_MO,                                     HSCRL_MO,            MS_BTN1, MS_BTN2, MS_BTN3, MOUSE_OFF, _______,
-        _______,     _______,      _______,             KC_ESC,   SCRL_MO, SCRL_TO,     _______,       _______,          SCRL_TO,             SCRL_MO, KC_ESC,  _______, _______,   _______,
+        _______,     _______,      CPI_LOW_MO,          KC_ESC,   SCRL_MO, SCRL_TO,     _______,       _______,          SCRL_TO,             SCRL_MO, KC_ESC,  CPI_LOW_MO, _______, _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                        _______,   _______
     ),
 
@@ -226,11 +228,15 @@ void keyboard_post_init_user(void) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     if (layer_state_cmp(state, _EXTEND) || layer_state_cmp(state, _NUMPAD) || layer_state_cmp(state, _FN)) {
-        // Keep trackball movement from reactivating _MOUSE while a typing layer is held.
-        state = remove_auto_mouse_layer(state, false);
+        // Clear the latched mouse layer and suppress reactivation while a typing layer is held.
+        state = remove_auto_mouse_layer(state, true);
         set_auto_mouse_enable(false);
     } else {
         set_auto_mouse_enable(get_highest_layer(default_layer_state) != _GAMING);
+
+        if (get_auto_mouse_enable() && layer_state_cmp(state, _MOUSE) && !get_auto_mouse_toggle()) {
+            auto_mouse_toggle();
+        }
     }
     return state;
 }
@@ -242,7 +248,7 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
 
 bool is_mouse_record_user(uint16_t keycode, keyrecord_t *record) {
     (void)record;
-    return keycode == HSCRL_MO || (keycode == KC_ESC && layer_state_is(_MOUSE));
+    return keycode == HSCRL_MO || keycode == CPI_HIGH_MO || keycode == CPI_LOW_MO || (keycode == KC_ESC && layer_state_is(_MOUSE));
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
@@ -257,6 +263,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_keylog(keycode);
     }
 #endif
+    if (keycode == CPI_HIGH_MO || keycode == CPI_LOW_MO) {
+        static uint16_t previous_cpi;
+
+        if (record->event.pressed) {
+            previous_cpi = keyball_get_cpi();
+            keyball_set_cpi(keycode == CPI_HIGH_MO ? previous_cpi + 200 : (previous_cpi > 200 ? previous_cpi - 200 : 1));
+        } else {
+            keyball_set_cpi(previous_cpi);
+        }
+
+        return false;
+    }
     if (keycode == HSCRL_MO) {
         keyball_set_scroll_mode(record->event.pressed);
 
