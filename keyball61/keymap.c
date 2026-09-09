@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MOUSE] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______, _______,   _______,
         _______,     _______,      CPI_HIGH_MO,         MS_BTN4,  MS_BTN5, _______,                                      _______,             MS_BTN5, MS_BTN4, CPI_HIGH_MO, _______, _______,
-        _______,     MOUSE_OFF,    MS_BTN3,             MS_BTN2,  MS_BTN1, HSCRL_MO,                                     HSCRL_MO,            MS_BTN1, MS_BTN2, MS_BTN3, MOUSE_OFF, _______,
+        _______,     MOUSE_OFF,    MS_BTN2,             MS_BTN3,  MS_BTN1, HSCRL_MO,                                     HSCRL_MO,            MS_BTN1, MS_BTN3, MS_BTN2, MOUSE_OFF, _______,
         _______,     _______,      CPI_LOW_MO,          KC_ESC,   SCRL_MO, SCRL_TO,     _______,       _______,          SCRL_TO,             SCRL_MO, KC_ESC,  CPI_LOW_MO, _______, _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                        _______,   _______
     ),
@@ -287,9 +287,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         send_keyboard_report();
         return false;
     }
-    if (keycode == MOUSE_OFF) {
+    if (keycode == MOUSE_OFF || keycode == KC_LGUI || keycode == KC_RGUI) {
         auto_mouse_reset_trigger(record->event.pressed);
-        return false;
+        return keycode != MOUSE_OFF;
     }
     return true;
 }
