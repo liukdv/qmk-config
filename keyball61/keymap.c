@@ -61,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_MOUSE] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______,     _______,  _______,
-        _______,     _______,      CPI_HIGH_MO,         MS_BTN4,  MS_BTN5, KC_DEL ,                                      KC_DEL ,             MS_BTN5, MS_BTN4, CPI_HIGH_MO, _______,  _______,
+        _______,     C(KC_X),      CPI_HIGH_MO,         MS_BTN4,  MS_BTN5, KC_DEL ,                                      KC_DEL ,             MS_BTN5, MS_BTN4, CPI_HIGH_MO, C(KC_X),  _______,
         _______,     MOUSE_OFF,    MS_BTN2,             MS_BTN3,  MS_BTN1, HSCRL_MO,                                     HSCRL_MO,            MS_BTN1, MS_BTN3, MS_BTN2,     MOUSE_OFF,_______,
-        _______,     _______,      CPI_LOW_MO,          KC_ESC,   SCRL_MO, SCRL_TO,     _______,       _______,          SCRL_TO,             SCRL_MO, KC_ESC,  CPI_LOW_MO,  _______,  _______,
+        _______,     C(KC_C),      CPI_LOW_MO,          KC_ESC,   SCRL_MO, SCRL_TO,     _______,       _______,          SCRL_TO,             SCRL_MO, KC_ESC,  CPI_LOW_MO,  C(KC_C),  _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                            _______,  _______
     ),
 
