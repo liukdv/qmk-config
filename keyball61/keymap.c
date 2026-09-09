@@ -287,7 +287,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         send_keyboard_report();
         return false;
     }
-    if (keycode == MOUSE_OFF || keycode == KC_LGUI || keycode == KC_RGUI) {
+    if (keycode == MOUSE_OFF) {
         auto_mouse_reset_trigger(record->event.pressed);
         return keycode != MOUSE_OFF;
     }
