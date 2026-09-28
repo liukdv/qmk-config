@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_EXTEND] = LAYOUT_right_ball(
-        KC_F12,      KC_F1,        KC_F2,               KC_F3,    KC_F4,   KC_F5,                                        KC_F6,               KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
+        _______,     KC_F1,        KC_F2,               KC_F3,    KC_F4,   KC_F5,                                        KC_F6,               KC_F7,   KC_F8,   KC_F9,   KC_F10,    _______,
         _______,     KC_ESC,       C(S(KC_Z)),          KC_WBAK,  KC_WFWD, S(KC_TAB),                                    KC_PGUP,             KC_HOME, KC_UP,   KC_END,  KC_DEL,    _______,
         _______,     KC_LALT,      KC_LCTL,             KC_LSFT,  KC_RGUI, KC_TAB,                                       KC_PGDN,             KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC,   _______,
         _______,     C(KC_Z),      KC_BSPC,             KC_ESC,   KC_DEL,  KC_ENT,      _______,       KC_RBRC,          KC_TILDE,            KC_VOLD, KC_MPLY, KC_VOLU, KC_MUTE,   _______,
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT_right_ball(
-        KC_F12,      KC_F1,        KC_F2,               KC_F3,    KC_F4,   KC_F5,                                        KC_F6,               KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
+        _______,     KC_F1,        KC_F2,               KC_F3,    KC_F4,   KC_F5,                                        KC_F6,               KC_F7,   KC_F8,   KC_F9,   KC_F10,    _______,
         _______,     KC_ESC ,      UG_TOGG,             UG_PREV,  UG_NEXT, DF(_GAMING),                                  KC_F11,              KC_F7,   KC_F8,   KC_F9,   KC_F12,    _______,
         _______,     KC_LALT,      KC_LCTL,             KC_LSFT,  KC_RGUI, _______,                                      KC_F10,              KC_F4,   KC_F5,   KC_F6,   KC_BRIU,   _______,
         _______,     CPI_D1K,      CPI_D100,            CPI_I100, CPI_I1K, KC_PSCR,     _______,       A(KC_F4),         C(KC_W),             KC_F1,   KC_F2,   KC_F3,   KC_BRID,   _______,
