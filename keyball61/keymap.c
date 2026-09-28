@@ -37,17 +37,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_EXTEND] = LAYOUT_right_ball(
         KC_F12,      KC_F1,        KC_F2,               KC_F3,    KC_F4,   KC_F5,                                        KC_F6,               KC_F7,   KC_F8,   KC_F9,   KC_F10,    KC_F11,
-        _______,     KC_ESC,       C(S(KC_Z)),          KC_WBAK,  KC_WFWD, S(KC_TAB),                                    KC_PGUP,             KC_HOME, KC_UP,   KC_END,  KC_DEL,    KC_GRV,
+        _______,     KC_ESC,       C(S(KC_Z)),          KC_WBAK,  KC_WFWD, S(KC_TAB),                                    KC_PGUP,             KC_HOME, KC_UP,   KC_END,  KC_DEL,    _______,
         _______,     KC_LALT,      KC_LCTL,             KC_LSFT,  KC_RGUI, KC_TAB,                                       KC_PGDN,             KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC,   _______,
-        _______,     C(KC_Z),      KC_BSPC,             KC_ESC,   KC_DEL,  KC_ENT,      _______,       KC_RBRC,          KC_BSLS,             KC_VOLD, KC_MPLY, KC_VOLU, KC_QUOT,   _______,
-        _______,     _______,      _______,             _______,  _______, _______,     _______,       KC_SPC,           KC_ENT,                                         KC_MUTE,   _______
+        _______,     C(KC_Z),      KC_BSPC,             KC_ESC,   KC_DEL,  KC_ENT,      _______,       KC_RBRC,          KC_TILDE,            KC_VOLD, KC_MPLY, KC_VOLU, KC_MUTE,   _______,
+        _______,     _______,      _______,             _______,  _______, _______,     _______,       KC_SPC,           KC_ENT,                                         G(KC_MUTE),_______
     ),
 
     [_NUMPAD] = LAYOUT_right_ball(
         _______,     _______,      _______,             _______,  _______, _______,                                      _______,             _______, _______, _______, _______,   _______,
-        _______,     KC_ESC,       KC_DQUO,             KC_MINS,  KC_PLUS, S(KC_TAB),                                    KC_ASTR,             KC_7,    KC_8,    KC_9,    KC_QUOT,   RALT(KC_5),
+        _______,     KC_ESC,       KC_DQUO,             KC_MINS,  KC_PLUS, S(KC_TAB),                                    KC_ASTR,             KC_7,    KC_8,    KC_9,    KC_BSLS,   RALT(KC_5),
         _______,     KC_LALT,      KC_LCTL,             KC_LSFT,  KC_RGUI, KC_TAB,                                       KC_0,                KC_4,    KC_5,    KC_6,    KC_EQL,    _______,
-        _______,     KC_TILDE,     KC_BSPC,             KC_ESC ,  KC_DEL , KC_ENT,     KC_GRV,        _______,           KC_DOT,              KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
+        _______,     KC_GRV,       KC_BSPC,             KC_ESC ,  KC_DEL , KC_ENT,      KC_QUOT,       _______,          KC_DOT,              KC_1,    KC_2,    KC_3,    KC_SLSH,   _______,
         _______,     _______,      _______,             _______,  _______, _______,     _______,       _______,          _______,                                        _______,   _______
     ),
 
