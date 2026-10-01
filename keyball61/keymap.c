@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,      KC_Q,         KC_W,                KC_F,     KC_P,    KC_G,                                         KC_J,                KC_L,    KC_U,    KC_Y,    KC_SCLN,   KC_MINS,
         KC_LSFT,     KC_A,         KC_R,                KC_S,     KC_T,    KC_D,                                         KC_H,                KC_N,    KC_E,    KC_I,    KC_O,      KC_RSFT,
         KC_LCTL,     KC_Z,         KC_X,                KC_C,     KC_V,    KC_B,        KC_RALT,       KC_LBRC,          KC_K,                KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RCTL,
-        KC_APP,      DF(_QWERTY),  LT(_NUMPAD, KC_DEL), KC_LALT,  KC_LGUI, MO(_EXTEND), KC_SPC,        LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT),                            KC_BSLS,   KC_QUOT
+        KC_APP,      DF(_QWERTY),  LT(_NUMPAD, KC_GRV), KC_LALT,  KC_LGUI, MO(_EXTEND), KC_SPC,        LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT),                            KC_BSLS,   KC_QUOT
     ),
 
     [_QWERTY] = LAYOUT_right_ball(
@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,      KC_Q,         KC_W,                KC_E,     KC_R,    KC_T,                                         KC_Y,                KC_U,    KC_I,    KC_O,    KC_P,      KC_MINS,
         KC_LSFT,     KC_A,         KC_S,                KC_D,     KC_F,    KC_G,                                         KC_H,                KC_J,    KC_K,    KC_L,    KC_SCLN,   KC_RSFT,
         KC_LCTL,     KC_Z,         KC_X,                KC_C,     KC_V,    KC_B,        KC_RALT,       KC_LBRC,          KC_N,                KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RCTL,
-        KC_APP,      DF(_COLEMAK), LT(_NUMPAD, KC_DEL), KC_LALT,  KC_LGUI, MO(_EXTEND), KC_SPC,        LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT),                            KC_BSLS,   KC_QUOT
+        KC_APP,      DF(_COLEMAK), LT(_NUMPAD, KC_GRV), KC_LALT,  KC_LGUI, MO(_EXTEND), KC_SPC,        LT(_FN, KC_BSPC), LT(_NUMPAD, KC_ENT),                            KC_BSLS,   KC_QUOT
     ),
 
     [_EXTEND] = LAYOUT_right_ball(
