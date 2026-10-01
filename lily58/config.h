@@ -4,3 +4,7 @@
 #define SPLIT_MODS_ENABLE           // (optional) share modifiers
 #define SPLIT_WPM_ENABLE            // (optional) share WPM
 // DO NOT put BOOTMAGIC_* here
+
+#define TAP_CODE_DELAY 5
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+#define QUICK_TAP_TERM_PER_KEY
